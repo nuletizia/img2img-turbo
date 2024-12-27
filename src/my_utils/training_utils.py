@@ -46,6 +46,7 @@ def parse_args_paired_training(input_args=None):
     parser.add_argument("--tokenizer_name", type=str, default=None)
     parser.add_argument("--lora_rank_unet", default=8, type=int)
     parser.add_argument("--lora_rank_vae", default=4, type=int)
+    parser.add_argument("--skip", default=False, action="store_true") # True to skip the encoder-decoder connections
 
     # training details
     parser.add_argument("--output_dir", required=True)
