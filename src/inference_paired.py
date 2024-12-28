@@ -65,9 +65,13 @@ if __name__ == "__main__":
 
         else:
             c_t = F.to_tensor(input_image).unsqueeze(0).cuda()
+            torch.manual_seed(args.seed)
+            B, C, H, W = c_t.shape
+            noise = torch.randn((1, 4, H // 8, W // 8), device=c_t.device)
             if args.use_fp16:
                 c_t = c_t.half()
-            output_image = model(c_t, args.prompt)
+                noise = noise.half()
+            output_image = model(c_t, args.prompt, deterministic=False, r=args.gamma, noise_map=noise)
 
         output_pil = transforms.ToPILImage()(output_image[0].cpu() * 0.5 + 0.5)
 
