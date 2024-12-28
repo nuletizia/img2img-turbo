@@ -71,7 +71,7 @@ if __name__ == "__main__":
             if args.use_fp16:
                 c_t = c_t.half()
                 noise = noise.half()
-            output_image = model(c_t, args.prompt, deterministic=False, r=args.gamma, noise_map=noise)
+            output_image = model(c_t, args.prompt, deterministic=False)
 
         output_pil = transforms.ToPILImage()(output_image[0].cpu() * 0.5 + 0.5)
 
